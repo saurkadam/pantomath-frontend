@@ -1,0 +1,62 @@
+<div ng-controller="LoginController">
+	<div id="changer">
+		<img class="active CoverImage" src="public/Images/performance.jpg"/>
+		<img src="public/Images/gauge.jpg" class="CoverImage" />
+		<img src="public/Images/histogram.png" class="CoverImage" />
+		<img src="public/Images/chart.jpg" class="CoverImage" />
+	</div>
+	<div class="overlay"></div>
+	<div class="container-fluid navigation-adjust">
+		<div class="row padupbtn">
+			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+				
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+						<a type="button" class="btn btn-lg custom-btn btn-1" data-toggle="modal" data-target="#myModal" ng-click="homeBtn('Register')">Register</a>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+						<a type="button" class="btn btn-lg custom-btn btn-1" data-toggle="modal" data-target="#myModal" ng-click="homeBtn('Sign In')" >Sign In</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+				
+			</div>
+		</div>
+		
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+			
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">{{modal_title}}</h4>
+				</div>
+				<div class="modal-body">
+					<form name="userForm" ng-submit="submitForm(user)" required> <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->
+					<div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+						<label>Email</label>
+						<input type="email" name="email" class="form-control" ng-model="user.email" required>
+						<p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+					</div>
+					<div class="form-group"  ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
+						<label>Password</label>
+						<input type="password" name="password" class="form-control" ng-model="user.password" ng-minlength="3" required>
+						<p ng-show="userForm.password.$error.minlength" class="help-block">password is too short.</p>
+					</div>
+					
+					<div class="modal-footer text-center">
+						<button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">{{modal_title}}</button>
+					</div>
+				</form>
+			</div>
+			
+		</div>
+	</div>
+</div>
+</div>

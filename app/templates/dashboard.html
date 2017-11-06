@@ -1,0 +1,55 @@
+<div class="container-fluid" ng-controller="HomeController">
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<ul class="accordion">
+			<li>
+				<a>Lorem ipsum</a>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit, ipsum, fuga, in, obcaecati magni ullam nobis voluptas fugiat tenetur voluptatum quas tempora maxime rerum neque deserunt suscipit provident cumque et mollitia ex aspernatur porro minus sapiente voluptatibus eos at perferendis repellat odit aliquid harum molestias ratione pariatur adipisci. Aliquid, iure.</p>
+			</li>
+			<li>
+				<a>Repellat Odit Aliquid</a>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit, ipsum, fuga, in, obcaecati magni ullam nobis voluptas fugiat tenetur voluptatum quas tempora maxime rerum neque deserunt suscipit provident cumque et mollitia ex aspernatur porro minus sapiente voluptatibus eos at perferendis repellat odit aliquid harum molestias ratione pariatur adipisci. Aliquid, iure.</p>
+			</li>
+			<li>
+				<a>Dolor sit Amet</a>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit, ipsum, fuga, in, obcaecati magni ullam nobis voluptas fugiat tenetur voluptatum quas tempora maxime rerum neque deserunt suscipit provident cumque et mollitia ex aspernatur porro minus sapiente voluptatibus eos at perferendis repellat odit aliquid harum molestias ratione pariatur adipisci. Aliquid, iure.</p>
+			</li>
+			</ul> <!-- / accordion -->
+		</div>
+		
+		
+		<span onclick="openNav()">open</span>
+		<div class="text-center container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<h1>Host: {{datavalue}} 
+					</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					AppName:{{appname}}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+					<epoch-gauge gauge-value="cpu" gauge-stream="cpu"></epoch-gauge>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+					<!--div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div-->
+					<!--line-graph-rt interval-attr='1000' headertext-attr='Real Time' legend-attr='true' exportingAttr='true' titleAttr='firstline'></line-graph-rt-->
+					<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+				</div>
+			</div>
+			
+			
+		</div>
+
+		
+	</div>
+	<script>
+
+
+	</script>
