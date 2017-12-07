@@ -1,4 +1,6 @@
-var app = angular.module('app', ['ngRoute','ngWebSocket']);
+
+
+var app = angular.module('app', ['ngRoute','ngWebSocket','chart.js']);
 
 app.config([ '$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
@@ -12,8 +14,10 @@ app.config([ '$routeProvider', '$locationProvider',
         }).otherwise({
             redirectTo : '/'
         });
-        
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        });
     }
 ]);
-
 

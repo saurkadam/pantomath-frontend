@@ -2,11 +2,12 @@
 <html ng-app="app">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
     <link rel="stylesheet"href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bower_components/epoch/dist/css/epoch.min.css">
-
+    <link rel="stylesheet"href="bower_components/animate.css/animate.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
     <link rel="stylesheet" href="app/css/index.css">
 
 </head>
@@ -18,9 +19,10 @@
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/angular-route/angular-route.min.js"></script>
         <script src="bower_components/angular-websocket/dist/angular-websocket.min.js"></script>
-
         <script src="bower_components/js-md5/src/md5.js"></script>
-
+        <script src="bower_components/chart.js/dist/Chart.js"></script>
+        <script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+        <script src="bower_components/underscore/underscore-min.js"></script>
     <!--MainJS-->
          <script src="app/js/app.js"></script>
 
@@ -29,15 +31,12 @@
         <script src="app/js/Controllers/LoginController.js"></script>
         <script src="app/js/Controllers/HomeController.js"></script>
 
+        <!--factories-->
+        <script src="app/js/Factories/websocketservice.js"></script>
 
         <!--custom js files-->
 
-        <script src="app/js/libraries/common.js"></script>
+        <script src="app/js/libraries/sessionmanager.js"></script>
 
-        <!--directives-->
-
-
-        <!--factories-->
-        <script src="app/js/Factories/websocketservice.js"></script>
     </body>
 </html>

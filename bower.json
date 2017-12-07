@@ -21,11 +21,12 @@
     "angular": "^1.6.6",
     "epoch": "^0.8.4",
     "js-md5": "md5#^0.7.2",
-    "ng-epoch": "^2.0.1",
     "angular-resource": "^1.6.6",
-    "angular-route": "^1.6.6"
+    "angular-route": "^1.6.6",
+    "animate.css": "^3.5.2"
   },
   "devDependencies": {
-    "d3": "^4.12.0"
+    "chart.js": "^2.7.1",
+    "underscore": "^1.8.3"
   }
 }

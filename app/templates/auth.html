@@ -1,4 +1,4 @@
-<div ng-controller="LoginController">
+
 	<div class="sect sectOne ">
 		<div class="overlay"></div>
 			<div class="container-fluid navigation-adjust">
@@ -7,15 +7,20 @@
 						
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 padupbtn">
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								<img src="https://s3.amazonaws.com/pantomathimages/logo.png" alt="logo">	
+							</div>
+							
+						</div>
 						<div class="row text-center">
 								<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-									<a type="button" class="btn btn-lg custom-btn btn-1" data-toggle="modal" data-target="#myModal" ng-click="homeBtn('Register')">Register</a>
+									<button type="button" class="btn btn-lg custom-btn btn-1" ng-click="homeBtn('Register')">Register</button>
 								</div>
 								<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-									<a type="button" class="btn btn-lg custom-btn btn-1" data-toggle="modal" data-target="#myModal" ng-click="homeBtn('Sign In')" >Sign In</a>
-								</div>						
-
-
+									<button type="button" class="btn btn-lg custom-btn btn-1" ng-click="homeBtn('Sign In')" >Sign In</button>
+									
+								</div>				
 						</div>
 					</div>
 					<div class="col-md-4 col-lg-4">
@@ -47,7 +52,7 @@
 					<div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
 						<label>Email</label>
 						<input type="email" name="emailId" class="form-control" ng-model="user.emailId" required>
-						<p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+						<p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block" ng-pattern="regex">Enter a valid email.</p>
 					</div>
 					<div class="form-group"  ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
 						<label>Password</label>
@@ -66,5 +71,4 @@
 			
 		</div>
 	</div>
-</div>
 </div>

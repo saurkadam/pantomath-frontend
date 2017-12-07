@@ -1,8 +1,38 @@
+html *
+{
+
+  font-family: 'Lato', sans-serif;
+}
+.w300{
+    font-weight: 300;
+}
+.pad5{
+  padding: 5px;
+}
+.chartdisplayer{
+  height:32em !important;
+}
+.green{
+  color:#fff !important;
+}
+.green:hover{
+  color:#fff !important;
+  background-color: #449d44 !important;
+}
+.chartpadder{
+  padding: 10px 10px 10px 10px;
+}
+.prediction{
+      padding: 0px 0px 10px;
+}
 * {
   margin: 0;
 }
 h1,h2,h3,h4,h5,p{
   margin-bottom: 20px;
+}
+.pad10{
+  padding:10px;
 }
 .cards{
   -webkit-box-shadow: 1px 1px 17px 0px rgba(50, 50, 50, 0.58);
@@ -10,6 +40,13 @@ h1,h2,h3,h4,h5,p{
     box-shadow: 1px 1px 17px 0px rgba(50, 50, 50, 0.58);
     padding: 10px 10px 10px 10px;
 }
+
+#exTab2 h3 {
+  color : white;
+  background-color: #428bca;
+  padding : 5px 15px;
+}
+
 .data-padder{
       padding: 15px 10px 10px 20px;
 }
@@ -40,19 +77,22 @@ html, body{
     text-decoration: none;
     background-color: #286090 !important;
 }
-.genbtn{
-      color: #fff !important;
-    text-decoration: none;
-    background-color: #286090 !important;
+.gen{
+  color:#fff !important;
+  background-color: #fa971d !important;
+}
+.gen:hover{
+  color:#fff !important;
+  background-color: #fa971d !important;
 }
 .sectOne{
-  background-image: url("../public/Images/computer_chart_3.jpg");
+  background-image: url("https://s3.amazonaws.com/pantomathimages/computer_chart_3.jpg");
 }
 .sectTwo{
-  background-image: url("../public/Images/computer_chart_2.jpg");
+  background-image: url("https://s3.amazonaws.com/pantomathimages/computer_chart_2.jpg");
 }
 .sectThree{
-  background-image: url("../public/Images/computer_chart_1.jpg");
+  background-image: url("https://s3.amazonaws.com/pantomathimages/computer_chart_1.jpg");
 }
 .sect{
   height:54em;
@@ -63,7 +103,7 @@ html, body{
 }
 .subSect{
     height: 32em;
-    background-color: rgba(0,0,0,0.5);
+    background-color: #fff;
 }
 .padupbtn{
      position: relative;
@@ -134,7 +174,10 @@ html, body{
   width: 100%;
   height: 400px;
 }
-
+.fixer{
+  width:16em;
+  position:fixed;
+}
 #server-log {
   width: 100%;
   height: 200px;
@@ -148,7 +191,6 @@ html, body{
 -moz-box-shadow:    2px 1px 3px 0px rgba(50, 50, 50, 0.36);
 box-shadow:         2px 1px 3px 0px rgba(50, 50, 50, 0.36);
 
-height:54em;
 }
 .headerbar{
       background-color: black;
@@ -162,39 +204,15 @@ height:54em;
       position: relative;
     left: 185px;
 }
-button.accordion {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
-    transition: 0.4s;
-}
 
-button.accordion.active, button.accordion:hover {
-    background-color: #ccc;
-}
+.panel-heading .accordion-toggle:after {
 
-button.accordion:after {
-    content: '\002B';
-    color: #777;
-    font-weight: bold;
-    float: right;
-    margin-left: 5px;
+  font-family: "Glyphicons Halflings"; 
+  content: "\e114"; 
+  float: right; 
+  color: grey; 
 }
+.panel-heading .accordion-toggle.collapsed:after {
 
-button.accordion.active:after {
-    content: "\2212";
-}
-
-div.panel {
-    padding: 0 18px;
-    background-color: white;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
+  content: "\e080";
 }

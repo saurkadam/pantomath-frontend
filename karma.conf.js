@@ -7,6 +7,11 @@ module.exports = function(config) {
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
+    jasmineNodeOpts: {
+      showColors: true,
+      includeStackTrace: true,
+      defaultTimeoutInterval: 1440000
+     },
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -15,11 +20,20 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+    'bower_components/jquery/dist/jquery.js',
     'bower_components/angular/angular.js',
     'bower_components/angular-mocks/angular-mocks.js',
     'bower_components/angular-resource/angular-resource.js',
-      'app/js/*.js',
-      'test/Controllers/*.js'
+    'bower_components/angular-route/angular-route.js',
+    'bower_components/angular-websocket/dist/angular-websocket.js',
+    'bower_components/chart.js/dist/Chart.js',
+    'node_modules/angular-chart.js/dist/angular-chart.min.js',
+    'app/js/*.js',
+    'app/js/Controllers/*.js',
+    'app/js/libraries/*.js',
+    'app/js/Factories/*.js',
+    'test/Controllers/*.js',
+
     ],
 
 

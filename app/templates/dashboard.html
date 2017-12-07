@@ -1,162 +1,430 @@
 
-<div ng-controller="HomeController">
+
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-2 col-lg-2 sidebar">
 				<div class="row ">	
 					<h1 class="padleft">Dashboard</h1>
 				</div>
-				<div class="row" ng-repeat="(key, value) in appNames" >
+				<div class="row fixer">
 
-						<button class="accordion" ng-click="appName(key)">{{key}}</button>
 
+					  
+					<div class="panel-group" id="accordion">
+					  <div class="panel panel-default">
+					    <div class="panel-heading">
+					      <h4 class="panel-title">
+					        <a class="accordion-toggle w300" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
+					          Server Apps
+					        </a>
+					      </h4>
+					    </div>
+					    <div id="collapseOne" class="panel-collapse collapse in">
+					      <div class="panel-body"  ng-repeat="(key, value) in appNames">
+								<a type="button" class="w300" ng-click="appNameData(key,value,'server')">{{key}}</a>
+					      </div>
+					    </div>
+					  </div>
+					  <div class="panel panel-default">
+					    <div class="panel-heading">
+					      <h4 class="panel-title">
+					        <a class="accordion-toggle w300" data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwo">
+					          Client Apps
+					        </a>
+					      </h4>
+					    </div>
+					    <div id="collapseTwo" class="panel-collapse collapse">
+					      <div class="panel-body" ng-repeat="(key, value) in clientappName">
+							<a type="button" ng-click="appNameData(key,value,'client')" >{{key}}</a>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+				<div class="row">
+					<div class="col-md-offset-1 col-lg-offset-1 prediction animated zoomIn" ng-if="predictionbutton">
+						<div>
+							<button class="btn-md btn-primary btn w300" type="button" ng-click="getPredictions(appPredicatioName)">Get Predictions</button>	
+						</div>
+
+					</div>
+					<div class="col-md-offset-1 col-lg-offset-1 animated zoomIn"  ng-if="appPredicatioName">
+						<div>
+							<button class="btn-md btn-primary btn w300" type="button" ng-click="getPastData(appPredicatioName,identifiervalue)">See Past Data</button>	
+						</div>
+
+					</div>								
+				</div>  
+					  
 
 				</div>
 			</div>
-			<div class="col-md-10 col-lg-10">
-				<div class="row">
-					<nav class="navbar  navbar-inverse">
-					  <div class="container-fluid">
-					    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					      <form class="navbar-form navbar-left">
-					        <div class="form-group">
-					          <input type="text" class="form-control" placeholder="Search">
-					        </div>
-					      </form>
-					      <ul class="nav navbar-nav navbar-right">
-					        <li><a href="#">Link</a></li>
-					        <li class="dropdown">
-					          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-					          <ul class="dropdown-menu drop">
-					            <li><a type="button" class="btn btn-sm btn-danger genbtn" ng-click="generateKey()">Generate Credentials</a></li>
-					            <li><a href="#">Another action</a></li>
-					            <li><a href="#">Something else here</a></li>
-					            <li role="separator" class="divider"></li>
-					            <li><a href="#">Separated link</a></li>
-					          </ul>
-					        </li>
-					      </ul>
-					    </div><!-- /.navbar-collapse -->
-					  </div><!-- /.container-fluid -->
-					</nav>
-	
-				</div>
-				<div class="row">
-					<div class="container">
-						<div class="row rowfiles" ng-repeat="appdata in hostnamedata">
-							<h3 class="text-center">{{appdata.hostname}}</h3>
-							<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 text-center data-padder">
-								<div class="cards">
-									<div class="card-data">
-										<h2>{{appdata.cpu | number : 2}}</h2>
+						<div class="col-md-10 col-lg-10">
+							<div class="row">
+								<nav class="navbar  navbar-inverse">
+								  <div class="container-fluid">
+								    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								      <form class="navbar-form navbar-left">
+								        <div class="form-group">
+											<p>BrandLogo</p>
+								        </div>
+								      </form>
+								      <ul class="nav navbar-nav navbar-right">
+								        <li class="dropdown">
+								          <a class="dropdown-toggle w300" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>
+								          <ul class="dropdown-menu">
+								            <li class="pad5"><a type="button" class="btn btn-sm btn-danger gen w300" ng-click="generateKey($rootScope.routes.key)">Generate Credentials</a></li>
+								            <li class="pad5"><a type="button" class="btn btn-sm btn-success w300 green" ng-click="seeCred()">See Credentials</a></li>
+								            <li role="separator" class="divider"></li>
+								            <li><a ng-click="signout()" class="w300 text-center">Sign Out</a></li>
+								          </ul>
+								        </li>
+								      </ul>
+								    </div><!-- /.navbar-collapse -->
+								  </div><!-- /.container-fluid -->
+								</nav>
+							</div>
+
+							<div class="row rowfiles  animated zoomIn"  ng-repeat="appdata in hostnamedata" ng-show="server">
+
+											<h3 class="text-center">{{appdata.hostname}}</h3>
+												<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-right" ng-if="appdata.granularRPM_keys">
+													<div>
+														<button class="btn-md btn-success btn w300" type="button" ng-click="identifierRPM('Request Per Minute',appdata.granularRPM_keys,appdata.granularRPM_values)">Granular RPM</button>	
+													</div>
+												</div>
+												<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-if="appdata.granularResponseTime">
+													<div>
+														<button class="btn-md btn-success btn w300" type="button" ng-click="identifierGRT('Granular Response Time',appdata.granularResponseTime,appdata.granularResponseTimevalues)">Granular Response Time</button>	
+													</div>
+												</div>
+												<div class="col-md-3 col-lg-3 text-center data-padder">
+													<div class="cards">
+														<div class="card-data">
+															<h2 class="w300">{{appdata.cpu | number : 2}}%</h2>
+														</div>
+														<div class="card-value w300">
+															CPU Utilization
+														</div>
+													</div>
+												</div>
+												<div class="col-md-3 col-lg-3 text-center data-padder">
+													<div class="cards">
+														<div class="card-data">
+															<h2 class="w300">{{appdata.memory  | number : 2}}Mb</h2>
+														</div>
+														<div class="card-value w300">
+															Memory
+														</div>
+													</div>
+												</div>
+												<div class="col-md-3 col-lg-3 text-center data-padder">
+													<div class="cards">
+														<div class="card-data">
+															<h2 class="w300">{{appdata.totalRPM | number : 2}}</h2>
+														</div>
+														<div class="card-value w300">
+															Total Request Per Minute
+														</div>
+													</div>
+												</div>
+												<div class="col-md-3 col-lg-3 text-center data-padder">
+													<div class="cards">
+														<div class="card-data">
+															<h2 class"w300">{{appdata.totalResponseTime | number : 2}}</h2>
+														</div>
+														<div class="card-value w300">
+															Total Response Time Per Minute
+														</div>
+													</div>
+												</div>
+												<div class="col-md-3 col-lg-3 text-center data-padder">
+													<div class="cards">
+														<div class="card-data">
+															<h2 class="w300">{{appdata.uptime | number : 2}}</h2>
+														</div>
+														<div class="card-value w300">
+															Uptime
+														</div>
+													</div>
+												</div>
+												<div class="col-md-3 col-lg-3 text-center data-padder">
+													<div class="cards">
+														<div class="card-data">
+															<h2 class="w300">{{appdata.osuptime | number : 2}}</h2>
+														</div>
+														<div class="card-value w300">
+															Os Uptime
+														</div>
+													</div>
+												</div>
+												<div class="col-md-3 col-lg-3 text-center data-padder">
+													<div class="cards">
+														<div class="card-data">
+															<h2 class="w300">{{appdata.freemem | number : 2}}</h2>
+														</div>
+														<div class="card-value w300">
+															Free Memory
+														</div>
+													</div>
+												</div>
+												<div class="col-md-3 col-lg-3 text-center data-padder">
+													<div class="cards">
+														<div class="card-data">
+															<h2 class="w300">{{appdata.totalmem | number : 2}}</h2>
+														</div>
+														<div class="card-value w300">
+															Total Memory
+														</div>
+													</div>
+												</div>															
+											</div>
+							<div class="row rowfiles text-center animated zoomIn" ng-repeat="clientdata in pageInfo" ng-show="client">
+								<div class="col-md-12 col-lg-12 w300">
+									<h1 class="w300">{{clientdata.pageName}}</h1>
+								</div>
+								<div class="col-md-3 col-lg-3" >
+									<div class="cards">
+										<div class="card-data w300">
+											<h2 class="w300">{{clientdata.count}}</h2>
+										</div>
+										<div class="card-value w300">
+											People Visited Page
+										</div>
 									</div>
-									<div class="card-value">
-										CPU Utilization
+								</div>
+								<div class="col-md-3 col-lg-3">
+									
+									<div class="cards">
+										<div class="card-data w300">
+											<h2 class="w300">{{clientdata.pageConnectTime | number : 2}} ms</h2>
+										</div>
+										<div class="card-value w300">
+											Page Connect Time
+										</div>
+									</div>
+								</div>
+								<div class="col-md-3 col-lg-3">
+									
+									<div class="cards">
+										<div class="card-data">
+											<h2 class="w300">{{clientdata.pageLoadTime | number : 2}} ms</h2>
+										</div>
+										<div class="card-value w300">
+											Page Load Time
+										</div>
+									</div>
+								</div>
+								<div class="col-md-3 col-lg-3">
+									<div class="cards">
+										<div class="card-data">
+											<h2 class="w300">{{clientdata.pageRenderTime | number : 2}} ms</h2>
+										</div>
+										<div class="card-value w300">
+											Page Render Time
+										</div>
+									</div>
+								</div>											
+							</div>
+							<div class="row rowfiles text-center animated zoomIn" ng-if="FileCollector.length > 0"  ng-show="client">
+								<div class="col-md-12 col-lg-12">
+									<h1 class="w300">Files and Loading Time</h1>
+								</div>
+								<div class="col-md-3 col-lg-3" ng-repeat="clientdata in FileCollector">
+									<div class="cards">
+										<div class="card-data">
+											<h2 class="w300">{{clientdata.loadTime | number : 2}}</h2>
+										</div>
+										<div class="card-value w300">
+											{{clientdata.componentName}}
+										</div>
+									</div>
+								</div>											
+							</div>									
+							<div class="row rowfiles text-center" ng-if="btncollector" ng-repeat="(key,value) in btncollector" ng-show="client">
+								<div class="col-md-12 col-lg-12">
+									<h1 class="w300">Button Event Stats</h1>
+								</div>
+								<div class="col-md-3 col-lg-3" ng-repeat="(key,dat) in value">
+									<div class="cards" >
+										<div class="card-data">
+											<h2 class="w300">{{dat}}</h2>
+										</div>
+										<div class="card-value">
+											<p class="w300">{{key}}</p>
+										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-md-3 col-md-3 col-lg-3 col-lg-3 text-center data-padder">
-								<div class="cards">
-									<div class="card-data">
-										<h2>{{appdata.memory  | number : 2}}</h2>
-									</div>
-									<div class="card-value">
-										Memory
+							<div class="row rowfiles text-center animated zoomIn" ng-show="past">
+								<div class="col-md-12 col-lg-12">
+									<h1 class="w300">Past Data</h1>
+								</div>
+								<div class="col-md-12 col-lg-12 chartpadder" ng-if="past_client">
+									<div class="cards">
+										<div class="card-data">
+											<h2 class="w300">Button Clicks</h2>
+										</div>
+										<div class="card-value">
+											<canvas id="bar" class="chart chart-bar chartdisplayer" chart-data="data_btnclicks" chart-labels="labels_btnclicks" chart-series="series_btnclicks" chart-options="optionsbar"> 
+											</canvas>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-md-3 col-md-3 col-lg-3 col-lg-3 text-center data-padder">
-								<div class="cards">
-									<div class="card-data">
-										<h2>{{appdata.totalRPM}}</h2>
-									</div>
-									<div class="card-value">
-										Total Response Per Minute
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3 col-md-3 col-lg-3 col-lg-3 text-center data-padder">
-								<div class="cards">
-									<div class="card-data">
-										<h2>{{appdata.totalResponseTime}}</h2>
-									</div>
-									<div class="card-value">
-										Response Per Minute
+								<div class="col-md-12 col-lg-12 chartpadder" ng-if="past_server">
+									<div class="cards">
+										<div class="card-data">
+											<h2 class="w300">CPU utilization</h2>
+										</div>
+										<div class="card-value">
+											<canvas id="base" class="chart-horizontal-bar chartdisplayer"
+											  chart-data="data_cpu" chart-labels="labels_data" chart-options="optionsservercpu">
+											</canvas> 
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-md-3 col-lg-3 text-center data-padder">
-								<div class="cards" data-toggle="modal" data-target="#Modal_request_data">
-									<div class="card-value" ng-click="identifier(granularRPM_keys,appdata.granularRPM_values,appdata.hostname)">
-										Granular Response Time
+								<div class="col-md-12 col-lg-12 chartpadder" ng-if="past_server">
+									<div class="cards" >
+										<div class="card-data">
+											<h2 class="w300">Memory utilization</h2>
+										</div>
+										<div class="card-value">
+											<canvas id="line" class="chart chart-line chartdisplayer" chart-data="data_memory" chart-labels="labels_data" chart-series="series_memory"chart-options="optionsservermem">
+											</canvas
+										</div>
 									</div>
-								</div>	
-							</div>
-							<div class="col-md-3 col-md-3 col-lg-3 col-lg-3 text-center data-padder">
-								<div class="cards" data-toggle="modal" data-target="#Modal_request_data" ng-click="identifier('Granular Response Per Minute')">
-									<div class="card-value">
-										Granular Response Per Minute
-									</div>
-								</div>
+								</div>								
 							</div>
 						</div>
 					</div>
+
+					</div>
+
 				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="Modal_request_data" role="dialog">
+
+	<div class="modal fade" id="Response_Per_Minute" role="dialog">
 		<div class="modal-dialog">
 			
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">{{modal_tile_dashboard}}</h4>
+					<h4 class="modal-title w300">{{modal_tile_dashboard_Response_Per_Minute}}</h4>
 				</div>
 				<div class="modal-body">
-					<div class="container">
-						<div class="row" ng-repeat="(key, value) in modal_data">
-							<div class="col-md-6 col-lg-6">
-								{{key}}
+					<div class="row text-center" >
+						<div class="col-md-6 col-lg-6" ng-if="modal_data_keys_Response_Per_Minute.length > 0">
+							<div class="col-md-12 col-lg-12 w300" ng-repeat="k in modal_data_keys_Response_Per_Minute track by $index">
+								{{k}}	
 							</div>
-							<div class="col-md-6 col-lg-6">
-								{{value}}
-							</div>
+						</div>
+						<div class="col-md-6 col-lg-6">
+							<div class="col-md-12 col-lg-12 w300" ng-repeat="v in modal_data_values_Response_Per_Minute track by $index">
+								{{v}}	
+							</div>							
+						</div>
+					</div>
+					<div class="row text-center">
+						<div class="col-md-12 col-lg-12" ng-if="modal_data_keys_Response_Per_Minute.length == 0">
+							<h4 class="w300">No Data Available</h4>
 						</div>
 					</div>
 				</div>			
 			</div>
 		</div>
 	</div>
-</div>
-
-
-<!--div class="text-center container">
-	<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<h1>Host: {{datavalue}}
-					</h1>
+	<div class="modal fade" id="Granular_Response_Time" role="dialog">
+		<div class="modal-dialog">
+			
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title w300">{{modal_tile_dashboard_Granular_Response_Time}}</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row text-center" >
+						<div class="col-md-6 col-lg-6" ng-if="modal_data_keys_Granular_Response_Time.length > 0">
+							<div class="col-md-12 col-lg-12 w300" ng-repeat="k in modal_data_keys_Granular_Response_Time track by $index">
+								{{k}}	
+							</div>
+						</div>
+						<div class="col-md-6 col-lg-6" ng-if="modal_data_values_Granular_Response_Time.length > 0">
+							<div class="col-md-12 col-lg-12 w300" ng-repeat="v in modal_data_values_Granular_Response_Time track by $index">
+								{{v}}	
+							</div>							
+						</div>
+					</div>
+					<div class="row text-center">
+						<div class="col-md-12 col-lg-12" ng-if="modal_data_values_Granular_Response_Time.length == 0">
+							<h4 class="w300">No Data Available</h4>
+						</div>
+					</div>
+				</div>			
 			</div>
+		</div>
 	</div>
-	<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					AppName:{{appname}}
-			</div>
-	</div>
-	<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-					<epoch-gauge gauge-value="cpu" gauge-stream="cpu"></epoch-gauge>
-			</div>
-	</div>
-	<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-		<!--div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div-->
-		<!--line-graph-rt interval-attr='1000' headertext-attr='Real Time' legend-attr='true' exportingAttr='true' titleAttr='firstline'></line-graph-rt-->
-	<!--div id="chartContainer" style="height: 370px; width: 100%;"></div>
-</div>
-</div>
 
 
-</div-->
+
+	<div class="modal fade" id="KeyGenModal" role="dialog">
+		<div class="modal-dialog">
+			
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Credentials</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row text-center" >
+						<div class="col-md-6 col-lg-6">
+							<div class="col-md-12 col-lg-12 w300">
+								<p>API KEY:</p>	
+							</div>
+						</div>
+						<div class="col-md-6 col-lg-6">
+							<div class="col-md-12 col-lg-12 w300">
+								{{apikey}}	
+							</div>							
+						</div>
+					</div>
+					<div class="row text-center" >
+						<div class="col-md-6 col-lg-6">
+							<div class="col-md-12 col-lg-12 w300">
+								<p>API SECRET:</p>	
+							</div>
+						</div>
+						<div class="col-md-6 col-lg-6">
+							<div class="col-md-12 col-lg-12 w300">
+								{{secret}}	
+							</div>							
+						</div>
+					</div>
+				</div>			
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="Predictor_request_data" role="dialog">
+		<div class="modal-dialog">
+			
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title w300">Prediction for Next Day</h4>
+				</div>
+				<div class="modal-body">
+					<div>
+						<p class="w300">CPU: {{predictedData.cpu | number : 2}}</p>
+						
+					</div>
+					<div>
+						<p class="w300">Memory: {{predictedData.memory | number : 2}}</p>
+						
+					</div>
+				</div>			
+			</div>
+		</div>
+	</div>
+
 
